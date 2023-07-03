@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Favicon icon-->
+	<link rel="shortcut icon" type="image/x-icon" href="{$basePath}/images/favicon/favicon.ico">
+
+	<!-- Libs CSS -->
+
+	<link href="{$basePath}/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="{$basePath}/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+	<link href="{$basePath}/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+	<link href="{$basePath}/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="{$basePath}/css/theme.min.css">
+	<title>Soubory | TaskManagement</title>
+</head>
+
+<body class="bg-light">
+<div id="db-wrapper">
+	<!-- navbar vertical -->
+	<!-- Sidebar -->
+	<nav class="navbar-vertical navbar">
+		<div class="nav-scroller">
+			<!-- Brand logo -->
+			<a class="navbar-brand" n:href="Admin:Dashboard">
+				<img src="{$basePath}/images/brand/logo/logo.svg" alt="" />
+			</a>
+			<!-- Navbar nav -->
+			<ul class="navbar-nav flex-column" id="sideNavbar">
+				<li class="nav-item">
+					<a n:class="'nav-link has-arrow', $presenter->isLinkCurrent('Admin:Dashboard') ? 'active'" n:href="Admin:Dashboard">
+						<i data-feather="home" class="nav-icon icon-xs me-2"></i>Nástěnka
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('Project:user') ? 'active'" n:href="Project:user">
+						<i data-feather="layers" class="nav-icon icon-xs me-2"></i>Projekty
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('Task:user') ? 'active'" n:href="Task:user">
+						<i data-feather="list" class="nav-icon icon-xs me-2"></i>Úkoly
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('File:files') ? 'active'" n:href="File:files">
+						<i data-feather="file" class="nav-icon icon-xs me-2"></i>Soubory
+					</a>
+                </li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('User:Edit') ? 'active'" n:href="User:Edit">
+						<i data-feather="settings" class="nav-icon icon-xs me-2"></i>Nastavení
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</nav>
+	<!-- Page content -->
+	<div id="page-content">
+		<div class="header @@classList">
+			<!-- navbar -->
+			<nav class="navbar-classic navbar navbar-expand-lg">
+				<a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
+				
+				<!--Navbar nav -->
+				<ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
+					
+					<!-- List -->
+					<li class="dropdown ms-2">
+						<a class="rounded-circle" href="#" role="button" id="dropdownUser"
+						   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="avatar avatar-md avatar-indicators avatar-online">
+								<img alt="avatar" src="{$avatar}"
+									 class="rounded-circle" />
+							</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end"
+							 aria-labelledby="dropdownUser">
+							<div class="px-4 pb-0 pt-2">
+
+
+								<div class="lh-1 ">
+									<h5 class="mb-1">{$accountName}</h5>
+									<a n:href="User:edit" class="text-inherit fs-6">Zobrazit profil</a>
+								</div>
+								<div class=" dropdown-divider mt-3 mb-2"></div>
+							</div>
+
+							<ul class="list-unstyled">
+
+								<li>
+									<a class="dropdown-item" n:href="User:edit">
+										<i class="me-2 icon-xxs dropdown-item-icon"
+										   data-feather="settings"></i>Nastavení profilu
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" n:href="Admin:signOut">
+										<i class="me-2 icon-xxs dropdown-item-icon"
+										   data-feather="power"></i>Odhlásit se
+									</a>
+								</li>
+							</ul>
+
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div> 
+		<!-- Container fluid -->
+		<div class="bg-primary pt-10 pb-21"></div>
+                <div class="container-fluid mt-n22 px-6">
+                    <div class="row my-12">
+                    <!-- card  -->
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-12">
+                    <div class="card">
+                        <!-- card header  -->
+                        <div class="card-header bg-white py-4">
+                        <h4 class="mb-0">Soubory</h4>
+                         {foreach $flashes as $flash}
+                            <div class="alert alert-{$flash->type} alert-dismissible fade show mt-6" role="alert">
+                                {$flash->message}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {/foreach}
+                        </div>
+                        <!-- table  -->
+                        <div class="table-responsive">
+                            <table class="table text-nowrap">
+                                <thead class="table-light">
+                                <tr>
+                                    <th>Jméno souboru</th>
+                                    <th>Velikost</th>
+                                    <th>Nahráno</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    {foreach $files as $index => $file}
+                                        <tr>
+                                            <td class="align-middle{if $index === count($files) - 1} border-bottom-0{/if}">
+                                                <div class="d-flex align-items-center">
+                                                   <div>
+                                                        <img src="{if $file['extension'] === 'jpg' || $file['extension'] === 'png' || $file['extension'] === 'PNG'} /images/files/picture.png {else} /images/files/files.png {/if}" alt="" class="avatar-md avatar rounded-circle">
+                                                    </div>
+                                                    <div class="ms-3 lh-1">
+                                                        <h5 class="mb-1">{$file['name']}</h5>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle{if $index === count($files) - 1} border-bottom-0{/if}">{$file['size']} MB</td>
+                                            <td class="align-middle{if $index === count($files) - 1} border-bottom-0{/if}">{$file['created']}</td>
+                                            <td class="align-middle{if $index === count($files) - 1} border-bottom-0{/if}">
+                                                <div class="dropdown dropstart">
+                                                    <a class="text-muted text-primary-hover" href="#" role="button" id="dropdownTeamOne" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical icon-xxs"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownTeamOne">
+                                                        <a class="dropdown-item" href="{$file['url']}" target="_blank">Zobrazit</a>
+                                                        <a class="dropdown-item" href="#" onclick="copyLinkToClipboard('{$file['url']}')">Kopírovat odkaz</a>
+                                                        <a class="dropdown-item" n:href="File:deleteFile, $file['name']">Smazat</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {/foreach}
+                                </tbody>
+                                </table>
+                            </div>
+                        </div>
+                          <div class="card-footer text-center" style="background-color: #F9FAFB; padding-top: 30px">
+                                <a href="{link File:edit}" class="btn btn-primary">Přidat soubor</a>
+                            </div>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="{$basePath}/libs/jquery/dist/jquery.min.js"></script>
+<script src="{$basePath}/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{$basePath}/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{$basePath}/libs/feather-icons/dist/feather.min.js"></script>
+<script src="{$basePath}/libs/prismjs/prism.js"></script>
+<script src="{$basePath}/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="{$basePath}/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+{if $showCopyLinkModal}
+    <div class="modal fade" id="copyLinkModal" tabindex="-1" role="dialog" aria-labelledby="copyLinkModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="copyLinkModalLabel">Odkaz zkopírován</h5>
+                </div>
+                <div class="modal-body">
+                    Odkaz byl úspěšně zkopírován do schránky.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyLinkToClipboard(link) {
+            const sanitizedLink = link.replace(/"/g, '');
+            navigator.clipboard.writeText(sanitizedLink)
+                .then(function() {
+                    console.log('Odkaz byl úspěšně zkopírován do schránky.');
+                    $('#copyLinkModal').modal('show');
+                })
+                .catch(function(error) {
+                    console.error('Chyba při kopírování odkazu do schránky:', error);
+                });
+        }
+
+        $('.modal-footer .btn-secondary').on('click', function () {
+           $('#copyLinkModal').modal('hide');
+        });
+    </script>
+{/if}
+
+
+
+
+
+<!-- Theme JS -->
+<script src="{$basePath}/js/theme.min.js"></script>
+
+
+
+</body>
+
+</html>

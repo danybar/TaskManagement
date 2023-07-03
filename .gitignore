@@ -1,0 +1,10 @@
+.theme
+.idea/
+vendor/
+www/css/*
+www/fonts/*
+www/images/*
+www/js/*
+www/libs/*
+.env
+composer.lock

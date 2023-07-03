@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Favicon icon-->
+	<link rel="shortcut icon" type="image/x-icon" href="{$basePath}/images/favicon/favicon.ico">
+
+	<!-- Libs CSS -->
+
+	<link href="{$basePath}/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="{$basePath}/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+	<link href="{$basePath}/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+	<link href="{$basePath}/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="{$basePath}/css/theme.min.css">
+	<title>Nastavení | TaskManagement</title>
+</head>
+
+<body class="bg-light">
+  <div id="db-wrapper">
+    <!-- navbar vertical -->
+     <!-- Sidebar -->
+ <nav class="navbar-vertical navbar">
+		<div class="nav-scroller">
+			<!-- Brand logo -->
+			<a class="navbar-brand" n:href="Admin:Dashboard">
+				<img src="{$basePath}/images/brand/logo/logo.svg" alt="" />
+			</a>
+			<!-- Navbar nav -->
+			<ul class="navbar-nav flex-column" id="sideNavbar">
+				<li class="nav-item">
+					<a n:class="'nav-link has-arrow', $presenter->isLinkCurrent('Admin:Dashboard') ? 'active'" n:href="Admin:Dashboard">
+						<i data-feather="home" class="nav-icon icon-xs me-2"></i>Nástěnka
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('Project:user') ? 'active'" n:href="Project:user">
+						<i data-feather="layers" class="nav-icon icon-xs me-2"></i>Projekty
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('Task:user') ? 'active'" n:href="Task:user">
+						<i data-feather="list" class="nav-icon icon-xs me-2"></i>Úkoly
+					</a>
+				</li>
+
+         <li class="nav-item">
+            <a n:class="'nav-link', $presenter->isLinkCurrent('File:files') ? 'active'" n:href="File:files">
+              <i data-feather="file" class="nav-icon icon-xs me-2"></i>Soubory
+            </a>
+          </li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('User:Edit') ? 'active'" n:href="User:Edit">
+						<i data-feather="settings" class="nav-icon icon-xs me-2"></i>Nastavení
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</nav>
+
+    <!-- page content -->
+    <div id="page-content">
+      <div class="header @@classList">
+  <!-- navbar -->
+  <nav class="navbar-classic navbar navbar-expand-lg">
+    <a id="nav-toggle" href="#"><i
+        data-feather="menu"
+
+        class="nav-icon me-2 icon-xs"></i></a>
+    <!--Navbar nav -->
+    <ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
+      <!-- List -->
+      <li class="dropdown ms-2">
+						<a class="rounded-circle" href="#" role="button" id="dropdownUser"
+						   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="avatar avatar-md avatar-indicators avatar-online">
+								<img alt="avatar" src="{$avatar}"
+									 class="rounded-circle" />
+							</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end"
+							 aria-labelledby="dropdownUser">
+							<div class="px-4 pb-0 pt-2">
+
+
+								<div class="lh-1 ">
+									<h5 class="mb-1">{$accountName}</h5>
+									<a n:href="User:edit" class="text-inherit fs-6">Zobrazit profil</a>
+								</div>
+								<div class=" dropdown-divider mt-3 mb-2"></div>
+							</div>
+
+							<ul class="list-unstyled">
+
+								<li>
+									<a class="dropdown-item" n:href="User:edit">
+										<i class="me-2 icon-xxs dropdown-item-icon"
+										   data-feather="settings"></i>Nastavení profilu
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" n:href="Admin:signOut">
+										<i class="me-2 icon-xxs dropdown-item-icon"
+										   data-feather="power"></i>Odhlásit se
+									</a>
+								</li>
+							</ul>
+
+						</div>
+					</li>
+    </ul>
+  </nav>
+</div>
+      
+      <div class="container-fluid p-6">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-12">
+            <!-- Page header -->
+         
+              <div class="border-bottom pb-4 mb-4">              
+                  <h3 class="mb-0 fw-bold">Nastavení</h3>             
+              </div>
+           
+              {foreach $flashes as $flash}
+                  <div class="alert alert-{$flash->type} alert-dismissible fade show mt-6" role="alert">
+                      {$flash->message}
+                      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+              {/foreach}
+
+          </div>
+        </div>
+        <div class="row mb-8">
+          <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+            <div class="mb-4 mb-lg-0">
+              <h4 class="mb-1">Obecné nastavení</h4>
+              <p class="mb-0 fs-5 text-muted">Nastavení profilu</p>
+            </div>
+
+          </div>
+
+          <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+            <!-- card -->
+            <div class="card">
+              <!-- card body -->
+              <div class="card-body">
+                <div class=" mb-6">
+                  <h4 class="mb-1">Obecné nastavení</h4>
+                </div>
+                
+                <div>  
+                  {form userProfileForm}
+                    <div class="mb-3 row">
+                        <label n:name="link" class="col-sm-4 col-form-label form-label">Avatar</label>
+                        <div class="col-md-8 col-12">
+                            <input n:name="link" type="text" class="form-control" placeholder="Vložte odkaz na soubor">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label n:name="username" class="col-sm-4 col-form-label form-label">Uživatelské jméno</label>
+                        <div class="col-md-8 col-12">
+                            <input n:name="username" type="text" class="form-control" placeholder="uživatelské jméno">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label n:name="email" class="col-sm-4 col-form-label form-label">Email</label>
+                        <div class="col-md-8 col-12">
+                            <input n:name="email" type="email" class="form-control" placeholder="email">
+                        </div>
+                    </div>
+                    <div class="row align-items-left">
+                        <div class="offset-md-4 col-md-8 mt-4">
+                            <button n:name="save" type="submit" class="btn btn-primary">Uložit změny</button>
+                        </div>
+                    </div>
+                {/form}
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row mb-8">
+          <div class="col-xl-3 col-lg-4 col-md-12 col-12">
+            <div class="mb-4 mb-lg-0">
+              <h4 class="mb-1">Nastavení hesla</h4>
+              <p class="mb-0 fs-5 text-muted">Změna hesla </p>
+            </div>
+
+          </div>
+
+          <div class="col-xl-9 col-lg-8 col-md-12 col-12">
+            <!-- card -->
+            <div class="card" id="edit">
+              <!-- card body -->
+              <div class="card-body">
+              
+                <div class="mb-6">
+                  <h4 class="mb-1">Změna uživatelského hesla</h4>
+                </div>
+
+                {form passwordChangeForm}
+                  <div class="mb-3 row">
+                      <label n:name="currentPassword" class="col-sm-4 col-form-label form-label">Aktuální heslo</label>
+                      <div class="col-md-8 col-12">
+                          <input n:name="currentPassword" type="password" class="form-control" placeholder="Zadejte aktuální heslo" required>
+                      </div>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <label n:name="newPassword" class="col-sm-4 col-form-label form-label">Nové heslo</label>
+                      <div class="col-md-8 col-12">
+                          <input n:name="newPassword" type="password" class="form-control" placeholder="Zadejte nové heslo" required>
+                      </div>
+                  </div>
+
+                  <div class="mb-3 row">
+                      <label n:name="confirmNewPassword" class="col-sm-4 col-form-label form-label">Potvrďte nové heslo</label>
+                      <div class="col-md-8 col-12">
+                          <input n:name="confirmNewPassword" type="password" class="form-control" placeholder="Zadejte nové heslo" required>
+                      </div>
+                  </div>
+
+                  <div class="row align-items-center">
+                      <div class="offset-md-4 col-md-8 col-12 mt-4">
+                          <button n:name="save" type="submit" class="btn btn-primary">Uložit změny</button>
+                      </div>
+                  </div>
+                {/form}
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!-- Scripts -->
+<!-- Libs JS -->
+<script src="{$basePath}/libs/jquery/dist/jquery.min.js"></script>
+<script src="{$basePath}/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{$basePath}/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{$basePath}/libs/feather-icons/dist/feather.min.js"></script>
+<script src="{$basePath}/libs/prismjs/prism.js"></script>
+<script src="{$basePath}/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="{$basePath}/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+<!-- Theme JS -->
+<script src="{$basePath}/js/theme.min.js"></script>
+
+</body>
+
+</html>

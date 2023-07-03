@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Model\Entity\Tasks" table="Tasks">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="project_id" length="32" type="integer">
+        </field>
+
+        <field name="title" length="255" type="string">
+        </field>
+
+        <field name="description" length="255" type="string">
+        </field>
+
+         <field name="status" length="32" type="string">
+        </field>
+
+         <field name="created_at" length="32" type="datetime">
+        </field>
+
+         <field name="due_date" length="32" type="datetime">
+        </field>
+
+        <field name="last_modified" length="32" type="datetime">
+        </field>
+
+        <field name="priority" length="32" type="string">
+        </field>
+
+        <field name="id_user" length="32" type="integer">
+        </field>
+
+    </entity>
+
+</doctrine-mapping>

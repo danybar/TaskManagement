@@ -1,0 +1,18 @@
+parameters:
+
+
+nettrine.dbal:
+  debug:
+    panel: %debugMode%
+    sourcePaths: [%appDir%]
+  connection:
+    host: database
+    driver: mysqli
+    dbname: test
+    user: test
+    password: test
+
+database:
+	dsn: 'mysql:host=database;dbname=test'
+	user: test
+	password: test

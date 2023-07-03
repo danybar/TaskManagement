@@ -1,0 +1,40 @@
+parameters:
+
+application:
+	errorPresenter: Error
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+
+session:
+	expiration: 14 days
+
+
+di:
+	export:
+		parameters: no
+		tags: no
+
+extensions:
+	console: Contributte\Console\DI\ConsoleExtension(%consoleMode%)
+
+	nettrine.dbal: Nettrine\DBAL\DI\DbalExtension
+	nettrine.dbal.console: Nettrine\DBAL\DI\DbalConsoleExtension(%consoleMode%)
+
+	nettrine.cache: Nettrine\Cache\DI\CacheExtension
+
+	nettrine.orm: Nettrine\ORM\DI\OrmExtension
+	nettrine.orm.cache: Nettrine\ORM\DI\OrmCacheExtension
+	nettrine.orm.console: Nettrine\ORM\DI\OrmConsoleExtension(%consoleMode%)
+	nettrine.orm.xml: Nettrine\ORM\DI\OrmXmlExtension
+
+
+console:
+	url: http://localhost
+
+nettrine.orm.xml:
+  mapping: [
+    App\Model\Entity: %appDir%/Model/Entity/xml
+  ]
+  fileExtension: .dcm.xml
+  simple: false

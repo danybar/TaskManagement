@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Favicon icon-->
+	<link rel="shortcut icon" type="image/x-icon" href="{$basePath}/images/favicon/favicon.ico">
+
+	<!-- Libs CSS -->
+	<link href="{$basePath}/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="{$basePath}/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+	<link href="{$basePath}/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+	<link href="{$basePath}/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="{$basePath}/css/theme.min.css">
+	<title>Registrace | TaskManagement</title>
+</head>
+
+<body class="bg-light">
+<!-- container -->
+<div class="container d-flex flex-column">
+	<div class="row align-items-center justify-content-center g-0
+        min-vh-100">
+		<div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
+
+			<div class="alert alert-{$flash->type}" role="alert" n:if="$flashes" n:foreach="$flashes as $flash">
+				{$flash->message}
+			</div>
+
+            <div class="card smooth-shadow-md">
+                <!-- Card body -->
+                <div class="card-body p-6">
+                    <div class="mb-4">
+                        <a href="../index.html"><img src="{$basePath}/images/brand/logo/logo-primary.svg" alt="" style="max-width: 200px"></a>
+                    </div>
+                    <!-- Form -->
+                    {form registrationForm}
+                        <!-- Username -->
+                        <div class="mb-3">
+                            {label username, class => "form-label"/}
+                            {input username, class => "form-control", placeholder => "Uživatelské jméno"}
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            {label password, class => "form-label"/}
+                            {input password, class => "form-control", placeholder => "**************"}
+                        </div>
+
+                        <div class="mb-3">
+                            {label email, class => "form-label"/}
+                            {input email, class => "form-control", placeholder => "Zadejte Váš email"}
+                        </div>
+
+                         <div class="mb-3">
+                            {label code, class => "form-label"/}
+                            {input code, class => "form-control", placeholder => "Zadejte kód organizace"}
+                        </div>
+
+                        {*<!-- Checkbox -->
+                        <div class="d-lg-flex justify-content-between align-items-center
+                            mb-4">
+                            <div class="form-check custom-checkbox">
+                                <input type="checkbox" class="form-check-input" id="rememberme">
+                                <label class="form-check-label" for="rememberme">Remember
+                                    me</label>
+                            </div>
+
+                        </div>*}
+                        <div>
+                            <!-- Button -->
+                            <div class="d-grid">
+                                {input submit, class => "btn btn-primary"}
+                            </div>
+
+                        </div>
+
+
+                    {/form}
+                </div>
+            </div>
+			
+		</div>
+	</div>
+</div>
+<!-- Scripts -->
+<!-- Libs JS -->
+<script src="{$basePath}/libs/jquery/dist/jquery.min.js"></script>
+<script src="{$basePath}/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{$basePath}/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{$basePath}/libs/feather-icons/dist/feather.min.js"></script>
+<script src="{$basePath}/libs/prismjs/prism.js"></script>
+<script src="{$basePath}/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="{$basePath}/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+<!-- Theme JS -->
+<script src="{$basePath}/js/theme.min.js"></script>
+</body>
+
+</html>

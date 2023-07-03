@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Favicon icon-->
+	<link rel="shortcut icon" type="image/x-icon" href="{$basePath}/images/favicon/favicon.ico">
+
+	<!-- Libs CSS -->
+
+	<link href="{$basePath}/libs/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+	<link href="{$basePath}/libs/dropzone/dist/dropzone.css"  rel="stylesheet">
+	<link href="{$basePath}/libs/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet" />
+	<link href="{$basePath}/libs/prismjs/themes/prism-okaidia.css" rel="stylesheet">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="{$basePath}/css/theme.min.css">
+	<title>Hlavní strana | TaskManagement</title>
+</head>
+
+<body class="bg-light">
+<div id="db-wrapper">
+	<!-- navbar vertical -->
+	<!-- Sidebar -->
+	<nav class="navbar-vertical navbar">
+		<div class="nav-scroller">
+			<!-- Brand logo -->
+			<a class="navbar-brand" n:href="Admin:Dashboard">
+				<img src="{$basePath}/images/brand/logo/logo.svg" alt="" />
+			</a>
+			<!-- Navbar nav -->
+			<ul class="navbar-nav flex-column" id="sideNavbar">
+				<li class="nav-item">
+					<a n:class="'nav-link has-arrow', $presenter->isLinkCurrent('Admin:Dashboard') ? 'active'" n:href="Admin:Dashboard">
+						<i data-feather="home" class="nav-icon icon-xs me-2"></i>Nástěnka
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('Project:user') ? 'active'" n:href="Project:user">
+						<i data-feather="layers" class="nav-icon icon-xs me-2"></i>Projekty
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('Task:user') ? 'active'" n:href="Task:user">
+						<i data-feather="list" class="nav-icon icon-xs me-2"></i>Úkoly
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('File:files') ? 'active'" n:href="File:files">
+						<i data-feather="file" class="nav-icon icon-xs me-2"></i>Soubory
+					</a>
+                </li>
+
+				<li class="nav-item">
+					<a n:class="'nav-link', $presenter->isLinkCurrent('User:Edit') ? 'active'" n:href="User:Edit">
+						<i data-feather="settings" class="nav-icon icon-xs me-2"></i>Nastavení
+					</a>
+				</li>
+
+			</ul>
+
+		</div>
+	</nav>
+	<!-- Page content -->
+	<div id="page-content">
+		<div class="header @@classList">
+			<!-- navbar -->
+			<nav class="navbar-classic navbar navbar-expand-lg">
+				<a id="nav-toggle" href="#"><i data-feather="menu" class="nav-icon me-2 icon-xs"></i></a>
+				
+				<!--Navbar nav -->
+				<ul class="navbar-nav navbar-right-wrap ms-auto d-flex nav-top-wrap">
+					
+					<!-- List -->
+					<li class="dropdown ms-2">
+						<a class="rounded-circle" href="#" role="button" id="dropdownUser"
+						   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<div class="avatar avatar-md avatar-indicators avatar-online">
+								<img alt="avatar" src="{$avatar}"
+									 class="rounded-circle" />
+							</div>
+						</a>
+						<div class="dropdown-menu dropdown-menu-end"
+							 aria-labelledby="dropdownUser">
+							<div class="px-4 pb-0 pt-2">
+
+
+								<div class="lh-1 ">
+									<h5 class="mb-1">{$accountName}</h5>
+									<a n:href="User:edit" class="text-inherit fs-6">Zobrazit profil</a>
+								</div>
+								<div class=" dropdown-divider mt-3 mb-2"></div>
+							</div>
+
+							<ul class="list-unstyled">
+
+								<li>
+									<a class="dropdown-item" n:href="User:edit">
+										<i class="me-2 icon-xxs dropdown-item-icon"
+										   data-feather="settings"></i>Nastavení profilu
+									</a>
+								</li>
+								<li>
+									<a class="dropdown-item" n:href="signOut">
+										<i class="me-2 icon-xxs dropdown-item-icon"
+										   data-feather="power"></i>Odhlásit se
+									</a>
+								</li>
+							</ul>
+
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</div> 
+		<!-- Container fluid -->
+		<div class="bg-primary pt-10 pb-21"></div>
+		<div class="container-fluid mt-n22 px-6">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-12">
+					<!-- Page header -->
+					<div>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="mb-2 mb-lg-0">
+								<h3 class="mb-0  text-white">{$organizationName}</h3>
+							</div>
+							<div>
+								<a n:href="Project:edit" class="btn btn-white">Vytvořit nový projekt</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
+					<!-- card -->
+					<div class="card ">
+						<!-- card body -->
+						<div class="card-body">
+							<!-- heading -->
+							<div class="d-flex justify-content-between align-items-center
+                    mb-3">
+								<div>
+									<h4 class="mb-0">Projekty</h4>
+								</div>
+								<div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-2">
+									<i class="bi bi-briefcase fs-4"></i>
+								</div>
+							</div>
+							<!-- project number -->
+							<div>
+								<h1 class="fw-bold">{$count}</h1>
+								<p class="mb-0"><span class="text-dark me-2">{$projectscomplet}</span>Dokončeno</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
+					<!-- card -->
+					<div class="card ">
+						<!-- card body -->
+						<div class="card-body">
+							<!-- heading -->
+							<div class="d-flex justify-content-between align-items-center
+                    mb-3">
+								<div>
+									<h4 class="mb-0">Aktivní úkoly</h4>
+								</div>
+								<div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-2">
+									<i class="bi bi-list-task fs-4"></i>
+								</div>
+							</div>
+							<!-- project number -->
+							<div>
+								<h1 class="fw-bold">{$taskcount}</h1>
+								<p class="mb-0"><span class="text-dark me-2">{$taskCompletedcount}</span>Dokončeno</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
+					<!-- card -->
+					<div class="card ">
+						<!-- card body -->
+						<div class="card-body">
+							<!-- heading -->
+							<div class="d-flex justify-content-between align-items-center
+                    mb-3">
+								<div>
+									<h4 class="mb-0">Členové týmu</h4>
+								</div>
+								<div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-2">
+									<i class="bi bi-people fs-4"></i>
+								</div>
+							</div>
+							<!-- project number -->
+							<div>
+								<h1 class="fw-bold">{$CountuserInTenant}</h1>
+								<p class="mb-0"><span class="text-dark me-2">{$oldestregistration->format('d.m.Y')}</span>První registrace</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-6">
+					<!-- card -->
+					<div class="card ">
+						<!-- card body -->
+						<div class="card-body">
+						<!-- heading -->
+						<div class="d-flex justify-content-between align-items-center
+							mb-3">
+							<div>
+							<h4 class="mb-0">Produktivita</h4>
+							</div>
+							<div class="icon-shape icon-md bg-light-primary text-primary
+							rounded-2">
+							<i class="bi bi-bullseye fs-4"></i>
+							</div>
+						</div>
+						<!-- project number -->
+						<div>
+							<h1 class="fw-bold">{$productivity}%</h1>
+							<p class="mb-0"><span class="text-success me-2">{$user_progress}%</span>produktivita uživatele</p>
+						</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			<!-- row  -->
+			<div class="row mt-6">
+				<div class="col-md-12 col-12">
+					<!-- card  -->
+					<div class="card">
+						<!-- card header  -->
+						<div class="card-header bg-white  py-4">
+							<h4 class="mb-0">Všechny projekty</h4>
+						</div>
+						<!-- table  -->
+						<div class="table-responsive">
+							<table class="table text-nowrap mb-0">
+								<thead class="table-light">
+								<tr>
+									<th>Název projektu</th>
+									<th>Datum splatnosti</th>
+									<th>Stav</th>
+									<th>Zodpovědná osoba</th>
+									<th>Progress</th>
+									<th>Akce</th>
+								</tr>
+								</thead>
+								<tbody>
+								{foreach $projects as $project}
+								<tr>
+									<td class="align-middle"><div class="d-flex align-items-center">
+											<div class="lh-1">
+												<h5 class=" mb-1"> <a href="{link Project:profile, $project->id}" class="text-inherit">{$project->name}</a></h5>
+											</div>
+										</div></td>
+									<td class="align-middle">{$project->due_date|date}</td>
+									<td class="align-middle">
+										{if $project->status == 'Not Completed'}
+											<span class="badge bg-danger">{$project->status}</span>
+										{else}
+											<span class="badge bg-success">{$project->status}</span>
+										{/if}
+									</td>
+									  <td class="align-middle"><div class="avatar-group">
+											<span class="avatar avatar-sm">
+												<img alt="avatar" src="{$project->user_id|getAvatarById}" class="rounded-circle"> {$project->user_id|getUserNameById}
+											</span>
+											</div>
+										</td>
+									<td class="align-middle text-dark"><div class="float-start me-3">{$project->id|getTaskCompletionRateByProjectId}%</div>
+										<div class="mt-2">
+											<div class="progress" style="height: 5px;">
+											<div class="progress-bar" role="progressbar" style="width:{$project->id|getTaskCompletionRateByProjectId}%" aria-valuenow="{$project->id|getTaskCompletionRateByProjectId}" aria-valuemin="0" aria-valuemax="100"></div>
+											</div>
+										</div>
+									</td>
+									<td class="align-middle">
+										<a href="{link Project:edit $project->id}"><i class="me-2 icon-xxs dropdown-item-icon" data-feather="settings"></i></a>
+										<a n:href="Project:deleteproject, $project->id"><i class="me-2 icon-xxs dropdown-item-icon" data-feather="trash-2"></i></a>
+									</td>
+								</tr>
+								{/foreach}
+								</tbody>
+							</table>
+						</div>
+						<!-- card footer  -->
+					
+					</div>
+
+				</div>
+			</div>
+		
+				<div class="col-xl-12 col-lg-12 col-md-12 col-12 mb-6 mt-6">
+					<div class="card h-100">
+						<!-- card header  -->
+						<div class="card-header bg-white py-4">
+							<h4 class="mb-0">Členové organizace</h4>
+						</div>
+						
+						<div class="table-responsive">
+							<table class="table text-nowrap">
+								<thead class="table-light">
+								<tr>
+									<th>Jméno</th>
+									<th>Email</th>
+									<th>Poslední přístup</th>
+									<th>Datum registrace</th>
+								</tr>
+								</thead>
+								<tbody>
+									{foreach $usersdata as $userinfo}
+										<tr>
+											<td class="align-middle">
+												<div class="d-flex align-items-center">
+													<div>
+														 {if $userinfo->avatar}
+															<img src="{$userinfo->avatar}" alt="" class="avatar-md avatar rounded-circle">
+														{else}
+															<img src="{$basePath}/images/avatar/avatar-1.jpg" alt="" class="avatar-md avatar rounded-circle">
+														{/if}
+													</div>
+													<div class="ms-3 lh-1">
+														<h5 class=" mb-1">{$userinfo->username}</h5>
+													</div>
+												</div>
+											</td>
+											<td class="align-middle">{$userinfo->email}</td>
+											<td class="align-middle">{if $userinfo->last_activity}{$userinfo->last_activity->format('d.m.Y H:i:s') }{else}Není k dispozici{/if}</td>
+											<td class="align-middle">{if $userinfo->registerdate}{$userinfo->registerdate->format('d.m.Y H:i:s') }{else}Není k dispozici{/if}</td>
+										</tr>
+									{/foreach}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- Scripts -->
+<!-- Libs JS -->
+<script src="{$basePath}/libs/jquery/dist/jquery.min.js"></script>
+<script src="{$basePath}/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{$basePath}/libs/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{$basePath}/libs/feather-icons/dist/feather.min.js"></script>
+<script src="{$basePath}/libs/prismjs/prism.js"></script>
+<script src="{$basePath}/libs/apexcharts/dist/apexcharts.min.js"></script>
+<script src="{$basePath}/libs/dropzone/dist/min/dropzone.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="{$basePath}/libs/prismjs/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+
+
+
+<!-- Theme JS -->
+<script src="{$basePath}/js/theme.min.js"></script>
+
+
+
+</body>
+
+</html>
